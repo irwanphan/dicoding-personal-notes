@@ -26,14 +26,19 @@ const Home = () => {
         // console.log(data);
     }, [data]);
 
+    const createNote = (newNote) => {
+        const newData = [...data, newNote];
+        setData(newData);
+    };
+
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="container">
-            <FormCreateNote />
+            <FormCreateNote onCreateNote={createNote} />
 
             <br/>
-            
+
             <div className="notes-container">
                 {
                     data &&

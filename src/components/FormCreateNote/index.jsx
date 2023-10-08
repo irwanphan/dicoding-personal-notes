@@ -1,8 +1,6 @@
 import React from "react";
-import { getInitialData } from "../../utils";
 
-const FormCreateNote = () => {
-    const lastNumber = getInitialData().length;
+const FormCreateNote = ({ onCreateNote }) => {
     const onSubmiteHandler = (e) => {
         e.preventDefault();
         const data = {
@@ -12,7 +10,11 @@ const FormCreateNote = () => {
             archived: false,
             createdAt: new Date().toISOString()
         }
-        console.log(data);
+        // console.log(data);
+        onCreateNote(data);
+
+        e.target.title.value = '';
+        e.target.body.value = '';
     }
     
     return (
