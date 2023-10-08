@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { createRoot } from 'react-dom/client';
-
-// import style
 import './styles/style.css';
-
 import { getInitialData } from './utils';
 import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 
 const Home = () => {
     const [data, setData] = useState([]);
-    const [archivedData, setArchivedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -25,7 +21,6 @@ const Home = () => {
         if (data) {
             setIsLoading(false);
         }
-        // console.log(data);
     }, [data]);
 
     const createNote = (newNote) => {
@@ -61,14 +56,17 @@ const Home = () => {
         <div className="container">
             <FormCreateNote onCreateNote={createNote} />
 
-            <input
-                type="text"
-                placeholder="Search notes..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <div className="divider"></div>
 
-            <br/>
+            <div className='search-input-container'>
+                <input
+                    className='search-input'
+                    type="text"
+                    placeholder="Search notes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+            </div>
 
             <div className="notes-container">
                 {
@@ -86,9 +84,11 @@ const Home = () => {
                 }
             </div>
 
+            <div className="divider"></div>
+            <h3>Archived Notes</h3>
             <div className="archived-notes-container">
-                <h2>Archived Notes</h2>
                 {
+                    archivedNotes.length == 0 ? <div>Tidak ada arsip</div> : 
                     archivedNotes.map((item) => {
                     return (
                         <Note

@@ -15,8 +15,17 @@ body {
   margin: 0 auto;
   padding: 1.5rem;
 }
+.container h3 {
+  margin: 1rem 0;
+}
 
-.form-create-note {
+.divider {
+  margin: 1.5rem 0;
+  border-bottom: 1px solid sienna;
+}
+
+.form-create-note,
+.search-input-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(20rem, 1fr));
   gap: 1.5rem;
@@ -51,6 +60,10 @@ body {
   border-color: sienna;
 }
 
+.search-input {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 input, textarea {
   width: 100%;
   padding: 0.625rem;
@@ -74,7 +87,7 @@ input::placeholder, textarea::placeholder {
   font-family: 'Comfortaa', 'Oxygen', 'Inter', 'sans-serif';
 }
 
-.note-app__header {
+/* .note-app__header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,9 +162,10 @@ input::placeholder, textarea::placeholder {
 .notes-list__empty-message {
   text-align: center;
   color: #aaa;
-}
+} */
 
-.notes-container {
+.notes-container,
+.archived-notes-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1.5rem;
@@ -212,7 +226,7 @@ input::placeholder, textarea::placeholder {
   border-color: sienna;
 }
 
-@media only screen and (min-width: 500px) {
+/* @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
   }
@@ -232,4 +246,4 @@ input::placeholder, textarea::placeholder {
   .notes-list {
     grid-template-columns: repeat(4, 1fr);
   }
-}
+} */
