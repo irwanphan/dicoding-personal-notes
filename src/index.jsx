@@ -5,6 +5,7 @@ import { getInitialData } from './utils';
 import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 import Header from './components/Header';
+import SearchInput from './components/SearchInput';
 
 const Home = () => {
     const [data, setData] = useState([]);
@@ -56,20 +57,10 @@ const Home = () => {
     return (
         <div className="container">
             <Header/>
-
             <FormCreateNote onCreateNote={createNote} />
 
             <div className="divider"></div>
-
-            <div className='search-input-container'>
-                <input
-                    className='search-input'
-                    type="text"
-                    placeholder="Search notes..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-            </div>
+            <SearchInput value={searchQuery} onChange={setSearchQuery} />
 
             <div className="notes-container">
                 {
