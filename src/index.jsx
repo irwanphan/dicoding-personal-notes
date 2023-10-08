@@ -9,8 +9,9 @@ import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 
 const Home = () => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +35,11 @@ const Home = () => {
         const updatedData = data.filter((note) => note.id !== noteId);
         setData(updatedData);
     };
+    const filteredNotes = data.filter(
+        (note) =>
+            note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            note.body.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     if (isLoading) return <div>Loading...</div>
 
@@ -41,12 +47,19 @@ const Home = () => {
         <div className="container">
             <FormCreateNote onCreateNote={createNote} />
 
+            <input
+                type="text"
+                placeholder="Search notes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
             <br/>
 
             <div className="notes-container">
                 {
-                    data.length == 0 ? <div>Tidak ada catatan</div> : 
-                    data.map((item) => {
+                    filteredNotes.length == 0 ? <div>Tidak ada catatan</div> : 
+                    filteredNotes.map((item) => {
                         return (
                             <Note 
                                 item={item}
