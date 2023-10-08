@@ -30,6 +30,10 @@ const Home = () => {
         const newData = [...data, newNote];
         setData(newData);
     };
+    const deleteNote = (noteId) => {
+        const updatedData = data.filter((note) => note.id !== noteId);
+        setData(updatedData);
+    };
 
     if (isLoading) return <div>Loading...</div>
 
@@ -44,7 +48,11 @@ const Home = () => {
                     data &&
                     data.map((item, index) => {
                         return (
-                            <Note item={item} key={index} />
+                            <Note 
+                                item={item}
+                                key={item.id} 
+                                onDeleteNote={deleteNote}
+                            />
                         )
                     })
                 }
