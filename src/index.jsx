@@ -9,7 +9,7 @@ import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 
 const Home = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -45,8 +45,8 @@ const Home = () => {
 
             <div className="notes-container">
                 {
-                    data &&
-                    data.map((item, index) => {
+                    data.length == 0 ? <div>Tidak ada catatan</div> : 
+                    data.map((item) => {
                         return (
                             <Note 
                                 item={item}
