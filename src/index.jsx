@@ -4,6 +4,7 @@ import './styles/style.css';
 import { getInitialData } from './utils';
 import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
+import Header from './components/Header';
 
 const Home = () => {
     const [data, setData] = useState([]);
@@ -54,6 +55,8 @@ const Home = () => {
 
     return (
         <div className="container">
+            <Header/>
+
             <FormCreateNote onCreateNote={createNote} />
 
             <div className="divider"></div>

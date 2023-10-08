@@ -13,7 +13,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 5rem 1.5rem 1.5rem;
 }
 .container h3 {
   margin: 1rem 0;
@@ -247,3 +247,16 @@ input::placeholder, textarea::placeholder {
     grid-template-columns: repeat(4, 1fr);
   }
 } */
+
+
+header.custom-header {
+  position: fixed;
+  top: 0;
+  max-width: 75rem;
+  width: auto;
+  background-color: sienna;
+  padding: 0.5rem 1.5rem;
+  color: aliceblue;
+  border-radius: 0 0 1rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+}
