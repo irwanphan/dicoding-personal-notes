@@ -10,6 +10,7 @@ import FormCreateNote from './components/FormCreateNote';
 
 const Home = () => {
     const [data, setData] = useState([]);
+    const [archivedData, setArchivedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -35,11 +36,24 @@ const Home = () => {
         const updatedData = data.filter((note) => note.id !== noteId);
         setData(updatedData);
     };
+    const toggleArchiveNote = (noteId) => {
+        const updatedData = data.map((note) => {
+            if (note.id === noteId) {
+                return { ...note, archived: !note.archived };
+            }
+            return note;
+        });
+        setData(updatedData);
+    };
+
     const filteredNotes = data.filter(
         (note) =>
             note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             note.body.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    const archivedNotes = filteredNotes.filter((note) => note.archived);
+    const nonArchivedNotes = filteredNotes.filter((note) => !note.archived);
 
     if (isLoading) return <div>Loading...</div>
 
@@ -58,17 +72,33 @@ const Home = () => {
 
             <div className="notes-container">
                 {
-                    filteredNotes.length == 0 ? <div>Tidak ada catatan</div> : 
-                    filteredNotes.map((item) => {
+                    nonArchivedNotes.length == 0 ? <div>Tidak ada catatan</div> : 
+                    nonArchivedNotes.map((item) => {
                         return (
                             <Note 
                                 item={item}
                                 key={item.id} 
                                 onDeleteNote={deleteNote}
+                                onToggleArchive={toggleArchiveNote}
                             />
                         )
                     })
                 }
+            </div>
+
+            <div className="archived-notes-container">
+                <h2>Archived Notes</h2>
+                {
+                    archivedNotes.map((item) => {
+                    return (
+                        <Note
+                            item={item}
+                            key={item.id}
+                            onDeleteNote={deleteNote}
+                            onToggleArchive={toggleArchiveNote}
+                        />
+                    );
+                })}
             </div>
         </div>
     )
