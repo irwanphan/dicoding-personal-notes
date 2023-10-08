@@ -6,7 +6,7 @@ const FormCreateNote = () => {
     const onSubmiteHandler = (e) => {
         e.preventDefault();
         const data = {
-            id: lastNumber + 1,
+            id: new Date().getTime(),
             title: e.target.title.value,
             body: e.target.body.value,
             archived: false,
