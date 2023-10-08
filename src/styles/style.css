@@ -187,35 +187,27 @@ input::placeholder, textarea::placeholder {
 
 .note-item__action {
   display: flex;
+  justify-content: flex-end;
 }
 
-.note-item__delete-button,.note-item__archive-button {
-  display: block;
-  width: 100%;
-  background-color: transparent;
-  border: 0;
-  border-top: 1px solid #aaa;
-  padding: 8px 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
+.note-item__button {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid sienna;
+  color: sienna;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.25rem;
   cursor: pointer;
+  background-color: wheat;
 }
-
-.note-item__delete-button {
-  border-right: 1px solid #aaa;
-  color: #ff5f52;
-}
-
-.note-item__archive-button {
-  color: #fff263;
-}
-
-.note-item__archive-button:hover {
-  color: #c49000;
-}
-
-.note-item__delete-button:hover {
-  color: #b00020;
+.note-item__button:hover,
+.note-item__button:focus {
+  background-color: sienna;
+  color: white;
+  border-color: sienna;
 }
 
 @media only screen and (min-width: 500px) {
