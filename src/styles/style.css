@@ -16,19 +16,62 @@ body {
   padding: 1.5rem;
 }
 
-input, textarea {
-  padding: 12px;
-  margin: 12px 0;
-  font-family: 'Inter', sans-serif;
+.form-create-note {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(20rem, 1fr));
+  gap: 1.5rem;
+}
+.form-create-note form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+  border: 1px solid sienna;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.form-create-note button {
+  display: block;
+  width: 100%;
+  padding: 8px;
   background-color: transparent;
+  font-family: 'Comfortaa', 'Oxygen', 'Inter', sans-serif;
+  color: sienna;
+  border: 1px solid sienna;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.form-create-note button:hover,
+.form-create-note button:focus {
+  background-color: sienna;
   color: white;
-  border: 1px solid #aaa;
-  border-radius: 4px;
+  border-color: sienna;
 }
 
+input, textarea {
+  width: 100%;
+  padding: 0.625rem;
+  margin: 0.75rem 0;
+  font-family: 'Comfortaa', 'Oxygen', 'Inter', 'sans-serif';
+  font-size: 1.125rem;
+  background-color: transparent;
+  color: sienna;
+  border: 1px solid sienna;
+  border-radius: 0.5rem;
+  display: block;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border: 1px solid darkorange;
+}
 input::placeholder, textarea::placeholder {
   color: #aaa;
   font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Comfortaa', 'Oxygen', 'Inter', 'sans-serif';
 }
 
 .note-app__header {

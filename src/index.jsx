@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 // import style
 import './styles/style.css';
 
-import { getInitialData, showFormattedDate } from './utils';
+import { getInitialData } from './utils';
 import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 
@@ -23,7 +23,7 @@ const Home = () => {
         if (data) {
             setIsLoading(false);
         }
-        console.log(data);
+        // console.log(data);
     }, [data]);
 
     if (isLoading) return <div>Loading...</div>
@@ -32,6 +32,8 @@ const Home = () => {
         <div className="container">
             <FormCreateNote />
 
+            <br/>
+            
             <div className="notes-container">
                 {
                     data &&
