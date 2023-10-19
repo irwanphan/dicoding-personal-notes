@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FormCreateNote from '../../components/FormCreateNote';
 import SearchInput from '../../components/SearchInput';
-import { getAllNotes, deleteNote } from '../../utils/local-data';
+import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '../../utils/local-data';
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 
@@ -38,12 +38,17 @@ const HomePage = () => {
         setData(data);
     };
     const toggleArchiveNote = async (noteId) => {
-        const updatedData = data.map((note) => {
-            if (note.id === noteId) {
-                return { ...note, archived: !note.archived };
-            }
-            return note;
-        });
+        // const updatedData = data.map((note) => {
+        //     if (note.id === noteId) {
+        //         return { ...note, archived: !note.archived };
+        //     }
+        //     return note;
+        // });
+        // setData(updatedData);
+        const itemMarked = await getNote(noteId)
+        itemMarked.archived ? unarchiveNote(noteId) : archiveNote(noteId)
+
+        const updatedData = await getAllNotes();
         setData(updatedData);
     };
 
