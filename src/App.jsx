@@ -32,7 +32,7 @@ const App = () => {
       const data = await getAllNotes();
       setData(data);
   };
-  const toggleArchiveNote = (noteId) => {
+  const toggleArchiveNote = async (noteId) => {
       const updatedData = data.map((note) => {
           if (note.id === noteId) {
               return { ...note, archived: !note.archived };

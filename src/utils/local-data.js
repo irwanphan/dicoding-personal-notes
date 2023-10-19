@@ -86,7 +86,6 @@ function unarchiveNote(id) {
     if (note.id === id) {
       return { ...note, archived: false };
     }
-
     return note;
   });
 }
