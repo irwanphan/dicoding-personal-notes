@@ -26,7 +26,6 @@ const DetailPage = () => {
 
     return (
         <div>
-
             <Link to={`/`}>Go Home</Link>
 
             <div className="divider"></div>            
