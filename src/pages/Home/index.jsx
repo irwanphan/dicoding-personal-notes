@@ -5,7 +5,6 @@ import { getAllNotes, deleteNote } from '../../utils/local-data';
 import Note from '../../components/Note';
 
 const HomePage = () => {
-
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
