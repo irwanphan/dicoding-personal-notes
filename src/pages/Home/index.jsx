@@ -10,6 +10,10 @@ FormCreateNote.propTypes = {
     title: propTypes.string,
     body: propTypes.string,
 }
+SearchInput.propTypes = {
+    value: propTypes.string,
+    onChange: propTypes.func,
+}
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
