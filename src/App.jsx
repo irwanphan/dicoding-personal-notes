@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { getInitialData } from './utils';
+import { getAllNotes, deleteNote } from './utils/local-data';
 import Note from './components/Note';
 import FormCreateNote from './components/FormCreateNote';
 import Header from './components/Header';
@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
       const fetchData = async () => {
-          const data = await getInitialData();
+          const data = await getAllNotes();
           setData(data);
       }
       fetchData();
@@ -27,9 +27,10 @@ const App = () => {
       const newData = [...data, newNote];
       setData(newData);
   };
-  const deleteNote = (noteId) => {
-      const updatedData = data.filter((note) => note.id !== noteId);
-      setData(updatedData);
+  const handleDeleteNote = async (noteId) => {
+      deleteNote(noteId);
+      const data = await getAllNotes();
+      setData(data);
   };
   const toggleArchiveNote = (noteId) => {
       const updatedData = data.map((note) => {
@@ -68,7 +69,7 @@ const App = () => {
                         <Note 
                             item={item}
                             key={item.id} 
-                            onDeleteNote={deleteNote}
+                            onDeleteNote={handleDeleteNote}
                             onToggleArchive={toggleArchiveNote}
                         />
                     )
@@ -86,7 +87,7 @@ const App = () => {
                     <Note
                         item={item}
                         key={item.id}
-                        onDeleteNote={deleteNote}
+                        onDeleteNote={handleDeleteNote}
                         onToggleArchive={toggleArchiveNote}
                     />
                 );
