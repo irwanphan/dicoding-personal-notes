@@ -1,6 +1,7 @@
 import React from 'react';
 import { showFormattedDate } from '../../utils';
 import { FiArchive, FiTrash, FiUpload } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const Note = ({item, onDeleteNote, onToggleArchive  }) => {
     // console.log(item)
@@ -14,7 +15,11 @@ const Note = ({item, onDeleteNote, onToggleArchive  }) => {
 
     return (
         <div className="note-item" key={item.id}>
-            <div className="note-item__title">{item.title}</div>
+            <div className="note-item__title">
+                <Link to={`/detail/${item.id}`}>
+                    {item.title}
+                </Link>
+            </div>
             <div className="note-item__date">{showFormattedDate(item.createdAt)}</div>
             <div className="note-item__body">{item.body}</div>
             <div className='note-item__action'>

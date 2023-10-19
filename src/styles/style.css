@@ -260,3 +260,9 @@ header.custom-header {
   border-radius: 0 0 1rem 1rem;
   font-family: 'Courier New', Courier, monospace;
 }
+
+header.custom-header a,
+header.custom-header a:visited {
+  color: aliceblue;
+  text-decoration: none;
+}
