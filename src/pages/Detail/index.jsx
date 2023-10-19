@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteNote, getNote } from "../../utils/local-data";
 import Note from '../../components/Note';
 
 const DetailPage = () => {
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState([]);
+    const [item, setItem] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getNote(id);
-            setData(data);
+            setItem(data);
         }
         fetchData();
     }, []);
     useEffect(() => {
-        if (data) {
+        if (item) {
             setIsLoading(false);
         }
-    }, [data]);
+    }, [item]);
 
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div>
             <Note
-                item={data}
-                key={data.id}
+                item={item}
+                key={item.id}
                 onDeleteNote={() => {
-                    deleteNote();
-                    location.href = '/';
+                    confirm('Are you sure you want to delete this note?', deleteNote(item.id))
+                    navigate('/');
                 }}
                 onToggleArchive={() => {
                     location.href = '/';
