@@ -22,10 +22,10 @@ const HomePage = () => {
         }
     }, [data]);
 
-    const createNote = (newNote) => {
-        const newData = [...data, newNote];
-        setData(newData);
-    };
+    // const createNote = (newNote) => {
+    //     const newData = [...data, newNote];
+    //     setData(newData);
+    // };
     const handleDeleteNote = async (noteId) => {
         deleteNote(noteId);
         const data = await getAllNotes();
@@ -54,7 +54,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <FormCreateNote onCreateNote={createNote} />
+            <FormCreateNote onCreateNote={setData} />
 
             <div className="divider"></div>
             <SearchInput value={searchQuery} onChange={setSearchQuery} />

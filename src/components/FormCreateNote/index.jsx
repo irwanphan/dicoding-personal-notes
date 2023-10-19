@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { addNote, getAllNotes } from "../../utils/local-data";
 
 const FormCreateNote = ({ onCreateNote }) => {
     const [title, setTitle] = useState('');
@@ -14,22 +15,25 @@ const FormCreateNote = ({ onCreateNote }) => {
         }
     };
 
-    const onSubmiteHandler = (e) => {
+    const onSubmiteHandler = async (e) => {
         e.preventDefault();
-        const data = {
-            id: new Date().getTime(),
-            // title: e.target.title.value,
-            title: title,
-            // body: e.target.body.value,
-            body: body,
-            archived: false,
-            createdAt: new Date().toISOString()
-        }
+        // const data = {
+        //     id: new Date().getTime(),
+        //     // title: e.target.title.value,
+        //     title: title,
+        //     // body: e.target.body.value,
+        //     body: body,
+        //     archived: false,
+        //     createdAt: new Date().toISOString()
+        // }
         // console.log(data);
-        onCreateNote(data);
-
-        e.target.title.value = '';
-        e.target.body.value = '';
+        addNote({ title: title, body: body })
+        const newData = await getAllNotes();
+        onCreateNote(newData);
+        // e.target.title.value = '';
+        // e.target.body.value = '';
+        setTitle('');
+        setBody('');
     }
     
     return (
