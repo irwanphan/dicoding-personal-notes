@@ -4,13 +4,24 @@ import SearchInput from '../../components/SearchInput';
 import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '../../utils/local-data';
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
+import { useSearchParams } from 'react-router-dom';
 
 FormCreateNote.propTypes = {
     title: propTypes.string,
     body: propTypes.string,
 }
 
-const HomePage = () => {
+const HomePageWrapper = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryParam = searchParams.get('queryParam');
+    function changeSearchParams(queryParam) {
+        setSearchParams({ queryParam });
+    }
+
+    return <HomePage searchQueryChange={changeSearchParams} />
+}
+
+const HomePage = ({searchQueryChange}) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
@@ -23,10 +34,11 @@ const HomePage = () => {
         fetchData();
     }, []);
     useEffect(() => {
+        searchQueryChange(searchQuery);
         if (data) {
             setIsLoading(false);
         }
-    }, [data]);
+    }, [searchQuery]);
 
     // const createNote = (newNote) => {
     //     const newData = [...data, newNote];
@@ -52,6 +64,10 @@ const HomePage = () => {
         setData(updatedData);
     };
 
+    const onSearchQueryChangeHandler = (query) => {
+        setSearchQuery(query);
+    }
+
     const filteredNotes = data.filter(
         (note) =>
             note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,7 +84,7 @@ const HomePage = () => {
             <FormCreateNote onCreateNote={setData} />
 
             <div className="divider"></div>
-            <SearchInput value={searchQuery} onChange={setSearchQuery} />
+            <SearchInput value={searchQuery} onChange={onSearchQueryChangeHandler} />
 
             <div className="notes-container">
                 {
@@ -106,4 +122,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default HomePageWrapper;
