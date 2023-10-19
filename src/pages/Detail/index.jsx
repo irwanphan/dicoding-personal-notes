@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteNote, getNote, archiveNote, unarchiveNote } from "../../utils/local-data";
 import Note from '../../components/Note';
 
@@ -26,6 +26,10 @@ const DetailPage = () => {
 
     return (
         <div>
+
+            <Link to={`/`}>Go Home</Link>
+
+            <div className="divider"></div>            
             <Note
                 item={item}
                 key={item.id}
