@@ -3,6 +3,12 @@ import FormCreateNote from '../../components/FormCreateNote';
 import SearchInput from '../../components/SearchInput';
 import { getAllNotes, deleteNote } from '../../utils/local-data';
 import Note from '../../components/Note';
+import propTypes from 'prop-types';
+
+FormCreateNote.propTypes = {
+    title: propTypes.string,
+    body: propTypes.string,
+}
 
 const HomePage = () => {
     const [data, setData] = useState([]);
