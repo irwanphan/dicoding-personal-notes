@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteNote, getNote } from "../../utils/local-data";
+import { deleteNote, getNote, archiveNote, unarchiveNote } from "../../utils/local-data";
 import Note from '../../components/Note';
 
 const DetailPage = () => {
@@ -34,7 +34,10 @@ const DetailPage = () => {
                     navigate('/');
                 }}
                 onToggleArchive={() => {
-                    location.href = '/';
+                    item.archived
+                    ?   confirm('Do you want to unarchive this note?', unarchiveNote(item.id))
+                    :   confirm('Do you want to archive this note?', archiveNote(item.id))
+                    navigate('/');
                 }}
             />
         </div>
