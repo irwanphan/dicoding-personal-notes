@@ -36,7 +36,13 @@ const Note = ({item, onDeleteNote, onToggleArchive  }) => {
 }
 
 Note.propTypes = {
-    item: propTypes.object.isRequired,
+    item: propTypes.shape({
+        id: propTypes.number.isRequired,
+        title: propTypes.string.isRequired,
+        body: propTypes.string.isRequired,
+        archived: propTypes.bool.isRequired,
+        createdAt: propTypes.string.isRequired,
+    }),
     onDeleteNote: propTypes.func.isRequired,
     onToggleArchive: propTypes.func.isRequired,
 };
