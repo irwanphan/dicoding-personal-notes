@@ -2,6 +2,7 @@ import React from 'react';
 import { showFormattedDate } from '../../utils';
 import { FiArchive, FiTrash, FiUpload } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 const Note = ({item, onDeleteNote, onToggleArchive  }) => {
     // console.log(item)
@@ -33,5 +34,11 @@ const Note = ({item, onDeleteNote, onToggleArchive  }) => {
         </div>
     )
 }
+
+Note.propTypes = {
+    item: propTypes.object.isRequired,
+    onDeleteNote: propTypes.func.isRequired,
+    onToggleArchive: propTypes.func.isRequired,
+};
 
 export default Note

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { addNote, getAllNotes } from "../../utils/local-data";
+import propTypes from 'prop-types';
 
 const FormCreateNote = ({ onCreateNote }) => {
     const [title, setTitle] = useState('');
@@ -61,6 +62,10 @@ const FormCreateNote = ({ onCreateNote }) => {
             </form>
         </div>
     )
+}
+
+FormCreateNote.propTypes = {
+    onCreateNote: propTypes.func,
 }
 
 export default FormCreateNote;

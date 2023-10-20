@@ -6,15 +6,6 @@ import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
 
-FormCreateNote.propTypes = {
-    title: propTypes.string,
-    body: propTypes.string,
-}
-SearchInput.propTypes = {
-    value: propTypes.string,
-    onChange: propTypes.func,
-}
-
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryParam = searchParams.get('queryParam');
@@ -124,6 +115,10 @@ const HomePage = ({searchQueryChange}) => {
             </div>
         </div>
     )
+}
+
+HomePage.propTypes = {
+    searchQueryChange: propTypes.func,
 }
 
 export default HomePageWrapper;

@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 const SearchInput = ({ value, onChange }) => {
     return (
@@ -13,5 +14,10 @@ const SearchInput = ({ value, onChange }) => {
         </div>
     );
 };
+
+SearchInput.propTypes = {
+    value: propTypes.string,
+    onChange: propTypes.func,
+}
 
 export default SearchInput;
