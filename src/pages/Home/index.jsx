@@ -5,8 +5,6 @@ import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '..
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import Auth from '../../utils/auth';
-import { getAccessToken } from '../../utils/network-data';
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
