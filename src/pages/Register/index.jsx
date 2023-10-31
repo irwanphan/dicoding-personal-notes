@@ -1,9 +1,25 @@
 import React from "react"
+import Auth from "../../utils/auth";
 
 const RegisterPage = () => {
     const onSubmiteHandler = (e) => {
         e.preventDefault();
-        console.log('submit');
+        e.stopPropagation();
+
+        const data = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+        handleRegister(data);
+    }
+
+    const handleRegister = async (data) => {
+        try {
+            const response = await Auth.register(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     return (
@@ -26,11 +42,12 @@ const RegisterPage = () => {
                 <label htmlFor="password">Password</label>
                 <input 
                     id="password" 
+                    type="password" 
                     placeholder="Password" 
                 />
 
-                <button type="submit">Login</button>
-                <p>No account yet? <a href="/register">Register</a></p>
+                <button type="submit">Register</button>
+                <p>No account yet? <a href="/login">Login</a></p>
             </form>
         </div>
     )

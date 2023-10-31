@@ -1,4 +1,16 @@
-const showFormattedDate = (date) => {
+const Utils = {
+  setUserToken(key, value) {
+      return sessionStorage.setItem(key, value);
+  },
+  getUserToken(key) {
+      return sessionStorage.getItem(key);
+  },
+  destroyUserToken(key) {
+      return sessionStorage.removeItem(key);
+  },
+};
+
+export const showFormattedDate = (date) => {
   const options = {
     weekday: "long",
     year: "numeric",
@@ -8,4 +20,4 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options)
 }
 
-export { showFormattedDate };
+export default Utils;
