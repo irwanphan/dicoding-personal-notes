@@ -1,6 +1,4 @@
 import React from "react"
-import Utils from "../../utils";
-import Config from "../../config/config";
 import { login, putAccessToken } from "../../utils/network-data";
 
 const LoginPage = () => {
