@@ -5,6 +5,7 @@ import Note from '../../components/Note';
 
 const DetailPage = () => {
     const { id } = useParams();
+    // TODO : if id not found, redirect to 404 page
     const [isLoading, setIsLoading] = useState(true);
     const [item, setItem] = useState([]);
     const navigate = useNavigate();
