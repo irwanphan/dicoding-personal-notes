@@ -1,7 +1,7 @@
 import React from "react"
-import Auth from "../../utils/auth";
 import Utils from "../../utils";
 import Config from "../../config/config";
+import { login, putAccessToken } from "../../utils/network-data";
 
 const LoginPage = () => {
     const onSubmiteHandler = (e) => {
@@ -16,8 +16,8 @@ const LoginPage = () => {
 
     const handleLogin = async (data) => {
         try {
-            const response = await Auth.login(data);
-            Utils.setUserToken(Config.USER_TOKEN_KEY, response.data.data.accessToken);
+            const response = await login(data)
+                .then((res) => putAccessToken(res.data.accessToken));
             window.alert('User logged in successfully');
             window.location.href = '/';
         } catch (error) {

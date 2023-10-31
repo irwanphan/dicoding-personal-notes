@@ -1,3 +1,5 @@
+import Config from "../config/config";
+
 const Utils = {
   setUserToken(key, value) {
       return sessionStorage.setItem(key, value);
@@ -9,6 +11,11 @@ const Utils = {
       return sessionStorage.removeItem(key);
   },
 };
+
+export const logout = () => {
+  Utils.destroyUserToken(Config.USER_TOKEN_KEY);
+  window.location.href = '/';
+}
 
 export const showFormattedDate = (date) => {
   const options = {

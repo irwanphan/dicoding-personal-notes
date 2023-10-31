@@ -1,5 +1,5 @@
 import React from "react"
-import Auth from "../../utils/auth";
+import { register } from "../../utils/network-data";
 
 const RegisterPage = () => {
     const onSubmiteHandler = (e) => {
@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
     const handleRegister = async (data) => {
         try {
-            const response = await Auth.register(data);
+            const response = await register(data);
             window.alert('User registered successfully');
             window.location.href = '/login';
         } catch (error) {
