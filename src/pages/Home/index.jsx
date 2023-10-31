@@ -5,14 +5,42 @@ import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '..
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
+import Auth from '../../utils/auth';
+import Utils from '../../utils';
+import Config from '../../config/config';
 
 const HomePageWrapper = () => {
+    const [ token, setToken ] = useState(null);
+    const [ user, setUser ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
     const queryParam = searchParams.get('queryParam');
     function changeSearchParams(queryParam) {
         setSearchParams({ queryParam });
     }
 
+    const loginCheck = async() => {
+        try {
+            const response = await Auth.getLoggedInUser(token);
+            // console.log(response.data.data);
+            setUser(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    useEffect(() => {
+        const sessionToken = Utils.getUserToken(Config.USER_TOKEN_KEY);
+        setToken(sessionToken);
+    }, [])
+    useEffect(() => {
+        if (token) {
+            loginCheck();
+        }
+        setIsLoading(false);
+    }, [token]);
+
+    if (isLoading) return <div>Loading...</div>
     return <HomePage searchQueryChange={changeSearchParams} />
 }
 

@@ -9,6 +9,12 @@ const Auth = {
     async login({ email, password }) {
         return await axios.post(ApiEndpoint.LOGIN, { email, password });
     },
+
+    async getLoggedInUser( token ) {
+        return await axios.get(ApiEndpoint.LOGGED_IN_USER, { 
+            headers: { Authorization: `Bearer ${token}` } 
+        });
+    }
 };
 
 export default Auth;
