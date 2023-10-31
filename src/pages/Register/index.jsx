@@ -17,6 +17,8 @@ const RegisterPage = () => {
     const handleRegister = async (data) => {
         try {
             const response = await Auth.register(data);
+            window.alert('User registered successfully');
+            window.location.href = '/login';
         } catch (error) {
             console.log(error);
         }
@@ -31,21 +33,18 @@ const RegisterPage = () => {
                     type="text" 
                     placeholder="Name" 
                 />
-
                 <label htmlFor="email">Email</label>
                 <input 
                     id="email" 
                     type="text" 
                     placeholder="Email" 
                 />
-
                 <label htmlFor="password">Password</label>
                 <input 
                     id="password" 
                     type="password" 
                     placeholder="Password" 
                 />
-
                 <button type="submit">Register</button>
                 <p>No account yet? <a href="/login">Login</a></p>
             </form>
