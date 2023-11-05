@@ -4,7 +4,7 @@ import SearchInput from '../../components/SearchInput';
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote } from '../../utils/network-data';
+import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote, getNote } from '../../utils/network-data';
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -48,10 +48,8 @@ const HomePage = ({searchQueryChange}) => {
 
     const toggleArchiveNote = async (noteId) => {
         const itemMarked = await getNote(noteId)
-        itemMarked.archived ? unarchiveNote(noteId) : archiveNote(noteId)
-
-        const updatedData = await getAllNotes();
-        setData(updatedData);
+        itemMarked.data.archived ? unarchiveNote(noteId) : archiveNote(noteId)
+        setIsChecking(true);
     };
 
     const onSearchQueryChangeHandler = (query) => {
@@ -76,7 +74,7 @@ const HomePage = ({searchQueryChange}) => {
                                 item={item}
                                 key={item.id} 
                                 onDeleteNote={handleDeleteNote}
-                                // onToggleArchive={toggleArchiveNote}
+                                onToggleArchive={toggleArchiveNote}
                             />
                         )
                     })
@@ -94,7 +92,7 @@ const HomePage = ({searchQueryChange}) => {
                             item={item}
                             key={item.id}
                             onDeleteNote={handleDeleteNote}
-                            // onToggleArchive={toggleArchiveNote}
+                            onToggleArchive={toggleArchiveNote}
                         />
                     );
                 })}
