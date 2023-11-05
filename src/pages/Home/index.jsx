@@ -5,7 +5,7 @@ import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '..
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { getActiveNotes } from '../../utils/network-data';
+import { getActiveNotes, getArchivedNotes } from '../../utils/network-data';
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -18,46 +18,29 @@ const HomePageWrapper = () => {
 }
 
 const HomePage = ({searchQueryChange}) => {
-    const [data, setData] = useState([]);
+    const [activeData, setActiveData] = useState([]);
+    const [archivedData, setArchivedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const retrieveActiveNotes = async () => {
+        const response = await getActiveNotes();
+        setActiveData(response.data);
+    }
+    const retrieveArchivedNotes = async () => {
+        const response = await getArchivedNotes();
+        setArchivedData(response.data);
+    }
     useEffect(() => {
-        const activeNotes = async () => {
-            const data = await getActiveNotes();
-            console.log(data);
-            // setData(data);
-        }
-        const fetchData = async () => {
-            const data = await getAllNotes();
-            setData(data);
-        }
-        fetchData();
+        retrieveActiveNotes();
+        retrieveArchivedNotes();
     }, []);
     useEffect(() => {
         searchQueryChange(searchQuery);
-        if (data) {
-            setIsLoading(false);
-        }
+        setIsLoading(false);
     }, [searchQuery]);
 
-    // const createNote = (newNote) => {
-    //     const newData = [...data, newNote];
-    //     setData(newData);
-    // };
-    const handleDeleteNote = async (noteId) => {
-        deleteNote(noteId);
-        const data = await getAllNotes();
-        setData(data);
-    };
     const toggleArchiveNote = async (noteId) => {
-        // const updatedData = data.map((note) => {
-        //     if (note.id === noteId) {
-        //         return { ...note, archived: !note.archived };
-        //     }
-        //     return note;
-        // });
-        // setData(updatedData);
         const itemMarked = await getNote(noteId)
         itemMarked.archived ? unarchiveNote(noteId) : archiveNote(noteId)
 
@@ -69,34 +52,25 @@ const HomePage = ({searchQueryChange}) => {
         setSearchQuery(query);
     }
 
-    const filteredNotes = data.filter(
-        (note) =>
-            note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            note.body.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    const archivedNotes = filteredNotes.filter((note) => note.archived);
-    const nonArchivedNotes = filteredNotes.filter((note) => !note.archived);
-
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div>
-            <FormCreateNote onCreateNote={setData} />
+            <FormCreateNote onCreateNote={setActiveData} />
 
             <div className="divider"></div>
             <SearchInput value={searchQuery} onChange={onSearchQueryChangeHandler} />
 
             <div className="notes-container">
                 {
-                    nonArchivedNotes.length == 0 ? <div>Tidak ada catatan</div> : 
-                    nonArchivedNotes.map((item) => {
+                    activeData.length == 0 ? <div>Tidak ada catatan</div> : 
+                    activeData.map((item) => {
                         return (
                             <Note 
                                 item={item}
                                 key={item.id} 
-                                onDeleteNote={handleDeleteNote}
-                                onToggleArchive={toggleArchiveNote}
+                                // onDeleteNote={handleDeleteNote}
+                                // onToggleArchive={toggleArchiveNote}
                             />
                         )
                     })
@@ -107,14 +81,14 @@ const HomePage = ({searchQueryChange}) => {
             <h3>Archived Notes</h3>
             <div className="archived-notes-container">
                 {
-                    archivedNotes.length == 0 ? <div>Tidak ada arsip</div> : 
-                    archivedNotes.map((item) => {
+                    archivedData.length == 0 ? <div>Tidak ada arsip</div> : 
+                    archivedData.map((item) => {
                     return (
                         <Note
                             item={item}
                             key={item.id}
-                            onDeleteNote={handleDeleteNote}
-                            onToggleArchive={toggleArchiveNote}
+                            // onDeleteNote={handleDeleteNote}
+                            // onToggleArchive={toggleArchiveNote}
                         />
                     );
                 })}
