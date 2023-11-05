@@ -185,6 +185,56 @@ header.custom-header a:visited {
   text-decoration: none;
 }
 
+.user-badge {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid sienna;
+  background-color: bisque;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.user-avatar:hover,
+.user-avatar:focus {
+  background-color: sienna;
+  color: wheat;
+}
+.user-info {
+  position: fixed;
+  text-align: right;
+  top: 4rem;
+  right: 1rem;
+  width: auto;
+  color: sienna;
+  background-color: bisque;
+  border-radius: 0.5rem;
+  border: 1px solid sienna;
+  padding: 0.5rem;
+}
+.user-info hr {
+  border-width: 1px;
+  border-color: sienna;
+  margin: 0.5rem 0;
+}
+button.logout {
+  background-color: transparent;
+  border: none;
+  color: sienna;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button.logout:hover {
+  text-decoration: underline;
+}
+
 h1.not-found {
   text-align: center;
   margin: 0;

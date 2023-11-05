@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import AppRoutes from './routes';
-import { getAccessToken, getUserLogged, login } from './utils/network-data';
+import { getAccessToken, getUserLogged } from './utils/network-data';
 import { useLocation } from 'react-router-dom';
+import UserBadge from './components/UserBadge';
 
 const App = () => {
   const [ user, setUser ] = useState(null);
@@ -55,6 +56,7 @@ const App = () => {
   return (
     <div className="container">
       <Header/>
+      { user && ( <UserBadge user={user}/> ) }
       <AppRoutes/>
     </div>
   )

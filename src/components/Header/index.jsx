@@ -7,7 +7,7 @@ const Header = () => {
             <h1>
                 <Link to="/">NotesThing</Link>
             </h1>
-            {/* create menu later :) */}
+            
         </header>
     )
 }
