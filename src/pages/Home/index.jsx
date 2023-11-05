@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import FormCreateNote from '../../components/FormCreateNote';
 import SearchInput from '../../components/SearchInput';
-import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '../../utils/local-data';
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { getActiveNotes, getArchivedNotes } from '../../utils/network-data';
+import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote } from '../../utils/network-data';
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +21,7 @@ const HomePage = ({searchQueryChange}) => {
     const [archivedData, setArchivedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isChecking, setIsChecking] = useState(true);
 
     const retrieveActiveNotes = async () => {
         const response = await getActiveNotes();
@@ -34,11 +34,17 @@ const HomePage = ({searchQueryChange}) => {
     useEffect(() => {
         retrieveActiveNotes();
         retrieveArchivedNotes();
-    }, []);
+        setIsChecking(false);
+    }, [isChecking]);
     useEffect(() => {
         searchQueryChange(searchQuery);
         setIsLoading(false);
     }, [searchQuery]);
+
+    const handleDeleteNote = async (noteId) => {
+        deleteNote(noteId);
+        setIsChecking(true);
+    };
 
     const toggleArchiveNote = async (noteId) => {
         const itemMarked = await getNote(noteId)
@@ -69,7 +75,7 @@ const HomePage = ({searchQueryChange}) => {
                             <Note 
                                 item={item}
                                 key={item.id} 
-                                // onDeleteNote={handleDeleteNote}
+                                onDeleteNote={handleDeleteNote}
                                 // onToggleArchive={toggleArchiveNote}
                             />
                         )
@@ -87,7 +93,7 @@ const HomePage = ({searchQueryChange}) => {
                         <Note
                             item={item}
                             key={item.id}
-                            // onDeleteNote={handleDeleteNote}
+                            onDeleteNote={handleDeleteNote}
                             // onToggleArchive={toggleArchiveNote}
                         />
                     );
