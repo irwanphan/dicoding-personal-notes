@@ -5,6 +5,7 @@ import { getAllNotes, getNote, deleteNote, unarchiveNote, archiveNote } from '..
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
+import { getActiveNotes } from '../../utils/network-data';
 
 const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +23,11 @@ const HomePage = ({searchQueryChange}) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
+        const activeNotes = async () => {
+            const data = await getActiveNotes();
+            console.log(data);
+            // setData(data);
+        }
         const fetchData = async () => {
             const data = await getAllNotes();
             setData(data);

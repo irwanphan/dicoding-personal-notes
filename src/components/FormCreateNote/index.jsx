@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { addNote, getAllNotes } from "../../utils/local-data";
+import { addNote, getActiveNotes } from "../../utils/network-data";
 import propTypes from 'prop-types';
 
 const FormCreateNote = ({ onCreateNote }) => {
@@ -18,21 +18,9 @@ const FormCreateNote = ({ onCreateNote }) => {
 
     const onSubmiteHandler = async (e) => {
         e.preventDefault();
-        // const data = {
-        //     id: new Date().getTime(),
-        //     // title: e.target.title.value,
-        //     title: title,
-        //     // body: e.target.body.value,
-        //     body: body,
-        //     archived: false,
-        //     createdAt: new Date().toISOString()
-        // }
-        // console.log(data);
-        addNote({ title: title, body: body })
-        const newData = await getAllNotes();
-        onCreateNote(newData);
-        // e.target.title.value = '';
-        // e.target.body.value = '';
+        const response = await addNote({ title: title, body: body })
+        const newData = await getActiveNotes();
+        onCreateNote(newData.data);
         setTitle('');
         setBody('');
     }
