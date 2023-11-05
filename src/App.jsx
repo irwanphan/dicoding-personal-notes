@@ -1,40 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import AppRoutes from './routes';
-import { getAccessToken, getUserLogged } from './utils/network-data';
+import { getAccessToken, getUserLogged, login } from './utils/network-data';
 import { useLocation } from 'react-router-dom';
 
 const App = () => {
-  const [ token, setToken ] = useState(null);
   const [ user, setUser ] = useState(null);
+  const [ isChecking, setIsChecking ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(true);
   const { pathname } = useLocation();
 
   const loginCheck = async() => {
     try {
+      const resToken = await getAccessToken();
+      if (!resToken) {
+        console.log(pathname)
+        console.log('no token');
+        switch (pathname) {
+          case '/login':
+          case '/register':
+            console.log('login / register');
+            break;
+          default:
+            console.log('redirecting to login');
+            window.location.href = '/login';
+            break;
+        }
+      }
+      if (resToken) {
         const response = await getUserLogged();
-        console.log(response)
-        // setUser(response.data.data);
+        setUser(response.data);
+      }
+      setIsChecking(false);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
   useEffect(() => {
-      const sessionToken = getAccessToken();
-      setToken(sessionToken);
+    loginCheck();
   }, [])
   useEffect(() => {
-    if (token === null && (pathname !== '/login' && pathname !== '/register')) {
-      console.log('no token');
-      console.log('redirecting to login');
-      window.location.href = '/login';
-    }
-    if (token) {
-        loginCheck();
-    }
+    if (isChecking) return;
     setIsLoading(false);
-  }, [token]);
+  }, [isChecking])
 
   if (isLoading) return (
     <div className='container'>
