@@ -6,10 +6,10 @@ import RegisterPage from "./pages/Register";
 import DetailPage from "./pages/Detail";
 import NotFoundPage from "./pages/404";
 
-const AppRoutes = () => {
+const AppRoutes = ({user}) => {
     return (
         <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage user={user} />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />

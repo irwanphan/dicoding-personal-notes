@@ -4,28 +4,30 @@ import SearchInput from '../../components/SearchInput';
 import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote, getNote } from '../../utils/network-data';
+import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote, getNote, getUserLogged, getAccessToken } from '../../utils/network-data';
 
-const HomePageWrapper = () => {
+const HomePageWrapper = ({user}) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryParam = searchParams.get('queryParam');
     function changeSearchParams(queryParam) {
         setSearchParams({ queryParam });
     }
 
-    return <HomePage searchQueryChange={changeSearchParams} />
+    return <HomePage searchQueryChange={changeSearchParams} user={user} />
 }
 
-const HomePage = ({searchQueryChange}) => {
+const HomePage = ({searchQueryChange, user}) => {
     const [activeData, setActiveData] = useState([]);
     const [archivedData, setArchivedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [isChecking, setIsChecking] = useState(true);
+    const ownId = user.id;
 
     const retrieveActiveNotes = async () => {
         const response = await getActiveNotes();
         setActiveData(response.data);
+        console.log(response.data);
     }
     const retrieveArchivedNotes = async () => {
         const response = await getArchivedNotes();
@@ -69,14 +71,16 @@ const HomePage = ({searchQueryChange}) => {
                 {
                     activeData.length == 0 ? <div>Tidak ada catatan</div> : 
                     activeData.map((item) => {
-                        return (
-                            <Note 
-                                item={item}
-                                key={item.id} 
-                                onDeleteNote={handleDeleteNote}
-                                onToggleArchive={toggleArchiveNote}
-                            />
-                        )
+                        if (item.owner === ownId) {
+                            return (
+                                <Note 
+                                    item={item}
+                                    key={item.id} 
+                                    onDeleteNote={handleDeleteNote}
+                                    onToggleArchive={toggleArchiveNote}
+                                />
+                            )
+                        }
                     })
                 }
             </div>
@@ -87,15 +91,18 @@ const HomePage = ({searchQueryChange}) => {
                 {
                     archivedData.length == 0 ? <div>Tidak ada arsip</div> : 
                     archivedData.map((item) => {
-                    return (
-                        <Note
-                            item={item}
-                            key={item.id}
-                            onDeleteNote={handleDeleteNote}
-                            onToggleArchive={toggleArchiveNote}
-                        />
-                    );
-                })}
+                        if (item.owner === ownId) {
+                            return (
+                                <Note
+                                    item={item}
+                                    key={item.id}
+                                    onDeleteNote={handleDeleteNote}
+                                    onToggleArchive={toggleArchiveNote}
+                                />
+                            )
+                        }
+                    })
+                }
             </div>
         </div>
     )

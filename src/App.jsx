@@ -57,7 +57,7 @@ const App = () => {
     <div className="container">
       <Header/>
       { user && ( <UserBadge user={user}/> ) }
-      <AppRoutes/>
+      <AppRoutes user={user}/>
     </div>
   )
 }
