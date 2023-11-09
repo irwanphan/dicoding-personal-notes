@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import ThemeToggler from "../ThemeToggler"
+import LocaleToggler from "../LocaleToggler"
 
 const Header = () => {
     return (
@@ -8,7 +9,10 @@ const Header = () => {
             <h1>
                 <Link to="/">NotesThing</Link>
             </h1>
-            <ThemeToggler />
+            <div className="flexing">
+                <ThemeToggler />
+                <LocaleToggler />
+            </div>
         </header>
     )
 }

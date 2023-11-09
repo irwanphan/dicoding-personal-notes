@@ -45,7 +45,10 @@ body {
 .container h3 {
   margin: 1rem 0;
 }
-
+.flexing {
+  display: flex;
+  gap: 0.5rem;
+}
 .divider {
   margin: 1.5rem 0;
   border-bottom: 1px solid var(--border-color);
