@@ -23,24 +23,30 @@ const DetailPage = () => {
         }
     }, [item]);
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <div>{isIndonesiaLocale ? 'Sedang memuat ...' : 'Loading...'}</div>
 
     return (
         <div>
-            <Link to={`/`}>Go Home</Link>
+            <Link to={`/`}>{isIndonesiaLocale ? 'Kembali' : 'Go Home'}</Link>
 
             <div className="divider"></div>            
             <Note
                 item={item}
                 key={item.id}
                 onDeleteNote={() => {
-                    confirm('Are you sure you want to delete this note?', deleteNote(item.id))
+                    isIndonesiaLocale ?
+                        confirm('Anda yakin ingin menghapus catatan ini?', deleteNote(item.id)) :
+                        confirm('Are you sure you want to delete this note?', deleteNote(item.id)) 
                     navigate('/');
                 }}
                 onToggleArchive={() => {
-                    item.archived
-                    ?   confirm('Do you want to unarchive this note?', unarchiveNote(item.id))
-                    :   confirm('Do you want to archive this note?', archiveNote(item.id))
+                    item.archived && isIndonesiaLocale ?
+                        confirm('Anda yakin ingin mengembalikan catatan ini?', unarchiveNote(item.id)) :
+                    item.archived && !isIndonesiaLocale ?
+                    confirm('Do you want to unarchive this note?', unarchiveNote(item.id)) :
+                    isIndonesiaLocale ?
+                        confirm('Anda yakin ingin mengarsipkan catatan ini?', archiveNote(item.id)) :
+                        confirm('Do you want to archive this note?', archiveNote(item.id))
                     navigate('/');
                 }}
             />
