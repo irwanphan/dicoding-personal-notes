@@ -5,7 +5,7 @@ const LocaleToggler = () => {
     const { isIndonesiaLocale, toggleLocale } = useLocale();
 
     return (
-        <div className={isIndonesiaLocale ? 'id-locale locale-toggler-container' : 'en-locale local-toggler-container'}>
+        <div className={isIndonesiaLocale ? 'id-locale' : 'en-locale'}>
             <button className="locale-toggler" onClick={toggleLocale}>
                 {isIndonesiaLocale ? 'ID' : 'EN'}
             </button>

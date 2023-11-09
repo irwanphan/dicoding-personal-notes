@@ -280,22 +280,21 @@ h3.not-found {
   color: var(--font-color);
 }
 
-.theme-toggler-container {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.theme-toggler-container .theme-toggler {
+.theme-toggler, .locale-toggler {
   border: none;
-  padding: 0 1rem;
   border-radius: 0.5rem;
+  width: 2rem;
   height: 2rem;
-  line-height: 2rem;
+  text-align: center;
   cursor: pointer;
+  font-size: 1rem;
+  border: 2px solid beige;
+  color: beige;
+  background-color: transparent;
 }
-
-.theme-toggler-container p {
-  font-size: 1.5rem;
-  height: 2rem;
-  line-height: 2.625rem;
+.theme-toggler {
+  line-height: 2rem;
+}
+.locale-toggler {
+  line-height: 1.75rem;
 }

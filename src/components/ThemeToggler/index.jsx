@@ -6,7 +6,7 @@ const ThemeToggler = () => {
     const { isDarkTheme, toggleTheme } = useTheme();
 
     return (
-        <div className={isDarkTheme ? 'dark-theme theme-toggler-container' : 'light-theme theme-toggler-container'}>
+        <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
             <button className="theme-toggler" onClick={toggleTheme}>
                 {isDarkTheme ? <FiMoon /> : <FiSun />}
             </button>
