@@ -60,7 +60,7 @@ const HomePage = ({searchQueryChange, user}) => {
         setSearchQuery(query);
     }
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <div>{isIndonesiaLocale ? 'Sedang memuat ...' : 'Loading...'}</div>
 
     return (
         <div>
@@ -71,7 +71,7 @@ const HomePage = ({searchQueryChange, user}) => {
 
             <div className="notes-container">
                 {
-                    activeData.length == 0 ? <div>Tidak ada catatan</div> : 
+                    activeData.length == 0 ? <div>{isIndonesiaLocale ? 'Tidak ada catatan' : 'Nothing to show'}</div> : 
                     activeData.map((item) => {
                         if (item.owner === ownId) {
                             return (
@@ -91,7 +91,7 @@ const HomePage = ({searchQueryChange, user}) => {
             <h3>{isIndonesiaLocale ? 'Arsip Catatan' : 'Archived Notes'}</h3>
             <div className="archived-notes-container">
                 {
-                    archivedData.length == 0 ? <div>Tidak ada arsip</div> : 
+                    archivedData.length == 0 ? <div>{isIndonesiaLocale ? 'Tidak ada arsip' : 'Nothing to show'}</div> : 
                     archivedData.map((item) => {
                         if (item.owner === ownId) {
                             return (
