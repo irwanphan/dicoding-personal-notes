@@ -9,10 +9,11 @@ export const LocaleProvider = ({ children }) => {
 
     const toggleLocale = () => {
         setIsIndonesiaLocale((prevIsIndonesiaLocale) => !prevIsIndonesiaLocale);
+        localStorage.setItem('isIndonesiaLocale', !isIndonesiaLocale);
     }
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-Locale', isIndonesiaLocale ? 'Indonesia' : 'English');
+        localStorage.getItem('isIndonesiaLocale') === 'true' ? setIsIndonesiaLocale(true) : setIsIndonesiaLocale(false);
     }, [isIndonesiaLocale]);
 
     return (

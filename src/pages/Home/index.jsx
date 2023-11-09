@@ -29,7 +29,7 @@ const HomePage = ({searchQueryChange, user}) => {
     const retrieveActiveNotes = async () => {
         const response = await getActiveNotes();
         setActiveData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
     }
     const retrieveArchivedNotes = async () => {
         const response = await getArchivedNotes();

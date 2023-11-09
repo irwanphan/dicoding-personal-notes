@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteNote, getNote, archiveNote, unarchiveNote } from "../../utils/local-data";
+import { deleteNote, getNote, archiveNote, unarchiveNote } from "../../utils/network-data";
 import Note from '../../components/Note';
+import { useLocale } from '../../contexts/LocaleContext';
 
 const DetailPage = () => {
     const { id } = useParams();
-    // TODO : if id not found, redirect to 404 page
     const [isLoading, setIsLoading] = useState(true);
-    const [item, setItem] = useState([]);
+    const [item, setItem] = useState();
     const navigate = useNavigate();
+    const { isIndonesiaLocale } = useLocale();
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getNote(id);
-            setItem(data);
+            const response = await getNote(id);
+            setItem(response.data);
         }
         fetchData();
     }, []);
     useEffect(() => {
-        if (item) {
+        if (item !== undefined) {
             setIsLoading(false);
         }
     }, [item]);
