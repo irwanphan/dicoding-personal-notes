@@ -5,6 +5,7 @@ import Note from '../../components/Note';
 import propTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
 import { getActiveNotes, getArchivedNotes, deleteNote, archiveNote, unarchiveNote, getNote, getUserLogged, getAccessToken } from '../../utils/network-data';
+import { useLocale } from '../../contexts/LocaleContext';
 
 const HomePageWrapper = ({user}) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,6 +24,7 @@ const HomePage = ({searchQueryChange, user}) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isChecking, setIsChecking] = useState(true);
     const ownId = user.id;
+    const { isIndonesiaLocale } = useLocale();
 
     const retrieveActiveNotes = async () => {
         const response = await getActiveNotes();
@@ -86,7 +88,7 @@ const HomePage = ({searchQueryChange, user}) => {
             </div>
 
             <div className="divider"></div>
-            <h3>Archived Notes</h3>
+            <h3>{isIndonesiaLocale ? 'Arsip Catatan' : 'Archived Notes'}</h3>
             <div className="archived-notes-container">
                 {
                     archivedData.length == 0 ? <div>Tidak ada arsip</div> : 

@@ -1,8 +1,10 @@
 import React, {useState} from "react"
 import { register } from "../../utils/network-data";
+import { useLocale } from "../../contexts/LocaleContext";
 
 const RegisterPage = () => {
     const [ isSubmitting, setIsSubmitting ] = useState(false);
+    const {isIndonesiaLocale} = useLocale()
 
     const onSubmiteHandler = (e) => {
         e.preventDefault();
@@ -31,19 +33,19 @@ const RegisterPage = () => {
     return (
         <div className="auth-form-container">
             <form onSubmit={(e) => onSubmiteHandler(e)}>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">{isIndonesiaLocale ? 'Nama' : 'Name'}</label>
                 <input 
                     id="name" 
                     type="text" 
                     placeholder="Name" 
                 />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{isIndonesiaLocale ? 'Surel' : 'Email'}</label>
                 <input 
                     id="email" 
                     type="text" 
                     placeholder="Email" 
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">{isIndonesiaLocale ? 'Kata Sandi' : 'Password'}</label>
                 <input 
                     id="password" 
                     type="password" 
@@ -52,9 +54,15 @@ const RegisterPage = () => {
                 <button type="submit"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? 'Submitting ...' : 'Register'}
+                    {
+                        isSubmitting && isIndonesiaLocale ? 'Sedang dikirim ...' :
+                        isSubmitting && !isIndonesiaLocale ? 'Submitting ...' :
+                        isIndonesiaLocale ? 'Daftar' : 'Register'
+                    }
                 </button>
-                <p>No account yet? <a href="/login">Login</a></p>
+                <p>{isIndonesiaLocale ? 'Sudah punya akun? ' : 'Have an account? '}
+                    <a href="/login">{isIndonesiaLocale ? 'Masuk' : 'Login'}</a>
+                </p>
             </form>
         </div>
     )

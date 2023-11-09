@@ -1,7 +1,9 @@
 import React, {useState} from "react"
 import { login, putAccessToken } from "../../utils/network-data";
+import { useLocale } from "../../contexts/LocaleContext";
 
 const LoginPage = () => {
+    const {isIndonesiaLocale} = useLocale()
     const [ isSubmitting, setIsSubmitting ] = useState(false);
     const onSubmiteHandler = (e) => {
         e.preventDefault();
@@ -29,13 +31,13 @@ const LoginPage = () => {
     return (
         <div className="auth-form-container">
             <form onSubmit={(e) => onSubmiteHandler(e)}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{isIndonesiaLocale ? 'Surel' : 'Email'}</label>
                 <input 
                     id="email" 
                     type="text" 
                     placeholder="Email" 
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">{isIndonesiaLocale ? 'Kata Sandi' : 'Password'}</label>
                 <input 
                     id="password" 
                     type="password" 
@@ -44,9 +46,15 @@ const LoginPage = () => {
                 <button type="submit"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? 'Submitting ...' : 'Login'}
+                    {
+                        isSubmitting && isIndonesiaLocale ? 'Sedang dikirim ...' :
+                        isSubmitting && !isIndonesiaLocale ? 'Submitting ...' :
+                        isIndonesiaLocale ? 'Masuk' : 'Login'
+                    }
                 </button>
-                <p>No account yet? <a href="/register">Register</a></p>
+                <p>{isIndonesiaLocale ? 'Belum punya akun? ' : 'No account yet? '}
+                    <a href="/register">{isIndonesiaLocale ? 'Daftar' : 'Register'}</a>
+                </p>
             </form>
         </div>
     )
