@@ -4,12 +4,14 @@ import AppRoutes from './routes';
 import { getAccessToken, getUserLogged } from './utils/network-data';
 import { useLocation } from 'react-router-dom';
 import UserBadge from './components/UserBadge';
+import { useTheme } from './contexts/themeContext';
 
 const App = () => {
   const [ user, setUser ] = useState(null);
   const [ isChecking, setIsChecking ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(true);
   const { pathname } = useLocation();
+  const { isDarkTheme, toggleTheme } = useTheme();
 
   const loginCheck = async() => {
     try {
@@ -47,9 +49,11 @@ const App = () => {
   }, [isChecking])
 
   if (isLoading) return (
-    <div className='container'>
-      <Header/>
-      <p>Authenticating ...</p>
+    <div className={isDarkTheme ? 'dark-theme' : 'light-theme'} >
+      <div className='container' >
+        <Header/>
+        <p>Authenticating ...</p>
+      </div>
     </div>
   )
 

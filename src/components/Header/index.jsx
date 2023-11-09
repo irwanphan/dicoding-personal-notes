@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import ThemeToggler from "../ThemeToggler"
 
 const Header = () => {
     return (
@@ -7,7 +8,7 @@ const Header = () => {
             <h1>
                 <Link to="/">NotesThing</Link>
             </h1>
-            
+            <ThemeToggler />
         </header>
     )
 }
