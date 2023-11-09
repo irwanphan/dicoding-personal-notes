@@ -1,10 +1,13 @@
-import React from "react"
+import React, {useState} from "react"
 import { register } from "../../utils/network-data";
 
 const RegisterPage = () => {
+    const [ isSubmitting, setIsSubmitting ] = useState(false);
+
     const onSubmiteHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        setIsSubmitting(true);
 
         const data = {
             name: e.target.name.value,
@@ -21,6 +24,7 @@ const RegisterPage = () => {
             window.location.href = '/login';
         } catch (error) {
             console.log(error);
+            setIsSubmitting(false);
         }
     }
     
@@ -45,7 +49,9 @@ const RegisterPage = () => {
                     type="password" 
                     placeholder="Password" 
                 />
-                <button type="submit">Register</button>
+                <button type="submit">
+                    {isSubmitting ? 'Submitting ...' : 'Register'}
+                </button>
                 <p>No account yet? <a href="/login">Login</a></p>
             </form>
         </div>
