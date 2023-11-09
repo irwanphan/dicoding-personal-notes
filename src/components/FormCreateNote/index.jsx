@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import { addNote, getActiveNotes } from "../../utils/network-data";
 import propTypes from 'prop-types';
+import { useLocale } from "../../contexts/LocaleContext";
 
 const FormCreateNote = ({ onCreateNote }) => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [remainingCharacters, setRemainingCharacters] = useState(50);
+    const {isIndonesiaLocale} = useLocale();
 
     const onTitleChange = (e) => {
         const inputValue = e.target.value;
@@ -28,8 +30,8 @@ const FormCreateNote = ({ onCreateNote }) => {
     return (
         <div className="form-create-note">
             <form onSubmit={(e) => onSubmiteHandler(e)}>
-                <label htmlFor="title">Title</label>
-                <small>remaining characters: {remainingCharacters}</small>
+                <label htmlFor="title">{isIndonesiaLocale ? 'Judul' : 'Title'}</label>
+                <small>{isIndonesiaLocale ? 'karakter tersisa' : 'remaining characters: '}{remainingCharacters}</small>
                 <input 
                     id="title" 
                     type="text" 
@@ -38,7 +40,7 @@ const FormCreateNote = ({ onCreateNote }) => {
                     onChange={(e) => onTitleChange(e)}
                 />
 
-                <label htmlFor="body">Body</label>
+                <label htmlFor="body">{isIndonesiaLocale ? 'Isi' : 'Body'}</label>
                 <textarea 
                     id="body" 
                     placeholder="Body" 
@@ -46,7 +48,7 @@ const FormCreateNote = ({ onCreateNote }) => {
                     onChange={(e) => setBody(e.target.value)}
                 />
 
-                <button type="submit">Submit</button>
+                <button type="submit">{isIndonesiaLocale ? 'Kirim' : 'Submit'}</button>
             </form>
         </div>
     )

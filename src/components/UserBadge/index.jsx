@@ -1,9 +1,11 @@
 import React, {useState} from "react"
 import { FiUser } from 'react-icons/fi';
 import logout from "../../utils/logout";
+import { useLocale } from "../../contexts/LocaleContext";
 
 const UserBadge = ({ user }) => {
     const [ isOpen, setIsOpen ] = useState(false);
+    const { isIndonesiaLocale } = useLocale();
     // console.log(user)
 
     const handleToggle = () => {
@@ -22,7 +24,9 @@ const UserBadge = ({ user }) => {
                         <p className="user-name">{user.name}</p>
                         <p className="user-email">{user.email}</p>
                         <hr/>
-                        <button className="logout" type="button" onClick={() => logout()}>Logout</button>
+                        <button className="logout" type="button" onClick={() => logout()}>
+                            {isIndonesiaLocale ? 'Keluar' : 'Logout'}
+                        </button>
                     </div>
                 )
             }
