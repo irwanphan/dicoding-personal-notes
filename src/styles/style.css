@@ -1,11 +1,25 @@
 :root {
   --font-color: sienna;
   --background-color: beige;
+  --border-color: sienna;
+  --form-background-color: rgba(255, 255, 255, 0.5);
+  --button-background-color: moccasin;
+  --button-background-hover-color: moccasin;
+  --button-color: sienna;
+  --button-hover-color: white;
+  --placeholder-color: #aaa;
 }
  
 [data-theme='dark'] {
   --font-color: beige;
   --background-color: dimgrey;
+  --border-color: beige;
+  --form-background-color: rgba(255, 255, 255, 0.2);
+  --button-background-color: sienna;
+  --button-background-hover-color: saddlebrown;
+  --button-color: moccasin;
+  --button-hover-color: white;
+  --placeholder-color: #ddd;
 }
 
 * {
@@ -20,6 +34,7 @@ body {
   color: var(--font-color);
   /* background-color: beige; */
   background-color: var(--background-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .container {
@@ -33,7 +48,7 @@ body {
 
 .divider {
   margin: 1.5rem 0;
-  border-bottom: 1px solid sienna;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .form-create-note,
@@ -50,19 +65,19 @@ body {
   align-items: flex-start;
   justify-content: center;
   padding: 1.5rem;
-  border: 1px solid sienna;
+  border: 1px solid var(--border-color);
   border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--form-background-color);
 }
 .auth-form-container button,
 .form-create-note button {
   display: block;
   width: 100%;
   padding: 8px;
-  background-color: moccasin;
+  background-color: var(--button-background-color);
   font-family: 'Comfortaa', 'Oxygen', 'Inter', sans-serif;
-  color: sienna;
-  border: 1px solid sienna;
+  color: var(--button-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
@@ -72,9 +87,9 @@ body {
 .auth-form-container button:focus,
 .form-create-note button:hover,
 .form-create-note button:focus {
-  background-color: sienna;
-  color: white;
-  border-color: sienna;
+  background-color: var(--button-background-hover-color);
+  color: var(--button-hover-color);
+  border-color: var(--border-color);
 }
 
 .search-input {
@@ -88,8 +103,8 @@ input, textarea {
   font-family: 'Comfortaa', 'Oxygen', 'Inter', 'sans-serif';
   font-size: 1.125rem;
   background-color: transparent;
-  color: sienna;
-  border: 1px solid sienna;
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   display: block;
 }
@@ -98,7 +113,7 @@ input:focus, textarea:focus {
   border: 1px solid darkorange;
 }
 input::placeholder, textarea::placeholder {
-  color: #aaa;
+  color: var(--placeholder-color);
   font-weight: bold;
   font-size: 1rem;
   font-family: 'Comfortaa', 'Oxygen', 'Inter', 'sans-serif';
@@ -112,13 +127,13 @@ input::placeholder, textarea::placeholder {
 }
 
 .note-item {
-  border: 1px solid sienna;
+  border: 1px solid var(--border-color);
   border-radius: 1rem;
   padding: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--form-background-color);
 }
 
 .note-item__title {
@@ -131,7 +146,7 @@ input::placeholder, textarea::placeholder {
 a, a:visited,
 .note-item__title a,
 .note-item__title a:visited {
-  color: sienna;
+  color: var(--font-color);
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
@@ -161,8 +176,8 @@ a:hover, a:focus,
 
 .note-item__button {
   transition: all 0.3s ease-in-out;
-  border: 1px solid sienna;
-  color: sienna;
+  border: 1px solid var(--border-color);
+  color: var(--button-color);
   width: 2.5rem;
   height: 2.5rem;
   line-height: 2.5rem;
@@ -170,13 +185,13 @@ a:hover, a:focus,
   border-radius: 50%;
   font-size: 1.25rem;
   cursor: pointer;
-  background-color: wheat;
+  background-color: var(--button-background-color);
 }
 .note-item__button:hover,
 .note-item__button:focus {
-  background-color: sienna;
-  color: white;
-  border-color: sienna;
+  background-color: var(--button-background-hover-color);
+  color: var(--button-hover-color);
+  border-color: var(--border-color);
 }
 
 header.custom-header {
@@ -209,15 +224,15 @@ header.custom-header a:visited {
   text-align: center;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid sienna;
-  background-color: bisque;
+  border: 1px solid var(--border-color);
+  background-color: var(--button-background-color);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 .user-avatar:hover,
 .user-avatar:focus {
-  background-color: sienna;
-  color: wheat;
+  background-color: var(--button-background-hover-color);
+  color: var(--button-hover-color);
 }
 .user-info {
   position: fixed;
@@ -225,21 +240,21 @@ header.custom-header a:visited {
   top: 4rem;
   right: 1rem;
   width: auto;
-  color: sienna;
-  background-color: bisque;
+  color: var(--font-color);
+  background-color: var(--button-background-color);
   border-radius: 0.5rem;
-  border: 1px solid sienna;
+  border: 1px solid var(--border-color);
   padding: 0.5rem;
 }
 .user-info hr {
   border-width: 1px;
-  border-color: sienna;
+  border-color: var(--border-color);
   margin: 0.5rem 0;
 }
 button.logout {
   background-color: transparent;
   border: none;
-  color: sienna;
+  color: var(--font-color);
   font-size: 1rem;
   cursor: pointer;
 }
@@ -252,12 +267,32 @@ h1.not-found {
   margin: 0;
   font-size: 8rem;
   font-family: 'Courier New', Courier, monospace;
-  color: sienna;
+  color: var(--font-color);
 }
 h3.not-found {
   margin: 0;
   text-align: center;
   font-size: 2rem;
   font-family: 'Courier New', Courier, monospace;
-  color: sienna;
+  color: var(--font-color);
+}
+
+.theme-toggler-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.theme-toggler-container .theme-toggler {
+  border: none;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+  line-height: 2rem;
+  cursor: pointer;
+}
+
+.theme-toggler-container p {
+  font-size: 1.5rem;
+  height: 2rem;
+  line-height: 2.625rem;
 }
