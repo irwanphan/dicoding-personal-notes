@@ -49,7 +49,9 @@ const RegisterPage = () => {
                     type="password" 
                     placeholder="Password" 
                 />
-                <button type="submit">
+                <button type="submit"
+                    disabled={isSubmitting}
+                >
                     {isSubmitting ? 'Submitting ...' : 'Register'}
                 </button>
                 <p>No account yet? <a href="/login">Login</a></p>

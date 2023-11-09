@@ -41,7 +41,9 @@ const LoginPage = () => {
                     type="password" 
                     placeholder="Password" 
                 />
-                <button type="submit">
+                <button type="submit"
+                    disabled={isSubmitting}
+                >
                     {isSubmitting ? 'Submitting ...' : 'Login'}
                 </button>
                 <p>No account yet? <a href="/register">Register</a></p>
