@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import AppRoutes from './routes';
+import AppRoutes from './Routes';
 import { getAccessToken, getUserLogged } from './utils/network-data';
 import { useLocation } from 'react-router-dom';
 import UserBadge from './components/UserBadge';
