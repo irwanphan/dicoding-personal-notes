@@ -112,6 +112,18 @@ const HomePage = ({searchQueryChange, user}) => {
 
 HomePage.propTypes = {
     searchQueryChange: propTypes.func,
+    user: propTypes.shape({
+        id: propTypes.string,
+        name: propTypes.string,
+        email: propTypes.string
+    })
+}
+HomePageWrapper.propTypes = {
+    user: propTypes.shape({
+        id: propTypes.string,
+        name: propTypes.string,
+        email: propTypes.string
+    })
 }
 
 export default HomePageWrapper;

@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { FiUser } from 'react-icons/fi';
 import logout from "../../utils/logout";
 import { useLocale } from "../../contexts/LocaleContext";
+import propTypes from 'prop-types';
 
 const UserBadge = ({ user }) => {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -32,6 +33,14 @@ const UserBadge = ({ user }) => {
             }
         </div>
     )
+}
+
+UserBadge.propTypes = {
+    user: propTypes.shape({
+        id: propTypes.string,
+        name: propTypes.string,
+        email: propTypes.string
+    })
 }
 
 export default UserBadge
